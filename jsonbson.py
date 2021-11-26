@@ -14,7 +14,7 @@ from pathlib import Path
 def json_to_bson(in_file, out_file):
     f = open(in_file)
     json_data = json.loads(f.read())
-    bson_data = bson.dumps(json_data)
+    bson_data = bson.encode(json_data)
     out = open(out_file, "wb")
     out.write(bson_data)
     print("Done")
@@ -22,7 +22,7 @@ def json_to_bson(in_file, out_file):
 def bson_to_json(in_file, out_file):
     bson_file = open(in_file, "rb")
     bson_bytes = bson_file.read()
-    decoded_data = bson.loads(bson_bytes)
+    decoded_data = bson.decode(bson_bytes)
     pretty_json = json.dumps(decoded_data, indent=4)
     out = open(out_file, "w")
     out.write(pretty_json)
